@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+</head>
+<body>
+<form th:object="${newContact}" 
+th:action="@{/update/{id}(id=${newContact.id})}" name = "input" onsubmit = "return(validate());" method=POST>
+
+Name: <input name="name"size="20" th:field="*{name}"> <br />
+Relationship: <input name="relationship"size="10" th:field="*{relationship}"><br />
+Phone Number: <input name="phone"size="20" th:field="*{phone}"><br />
+Street: <input name="address.street"size="20" th:field="*{address.street}"><br />
+City: <input name="address.city"size="20" th:field="*{address.city}"><br />
+State:<input name="address.state"size="20" th:field="*{address.state}"><br />
+<input name="submit"type="submit"value="submit"/>
+</form>
+<div id="message"></div>
+
+<script type = "text/javascript">
+
+	function validate()
+	{
+		var name = document.input.name.value;
+		var relationship = document.input.relationship.value;
+		var phone = document.input.phone.value;
+		if (name.length < 1)
+			{
+			document.getElementById("message").innerHTML = "A name is required";
+			return false;
+			}
+		else if (relationship.length < 1)
+			{
+			document.getElementById("message").innerHTML = "Relationship field required";
+			return false;
+			}
+		else if (phone.length < 1)
+			{
+			document.getElementById("message").innerHTML = "Phone number is required";
+			return false;
+			}
+			return true;
+	}
+</script>
+
+<a href="viewAll">View all Contacts</a>
+</body>
+</html>
